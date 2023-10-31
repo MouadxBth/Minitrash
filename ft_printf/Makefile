@@ -3,7 +3,7 @@ LIB := ft_printf.h
 CFILES := ft_printf.c ft_printf_utils.c ft_oxhex.c ft_putnbr_fd.c
 COBJECTS := $(CFILES:%.c=%.o)
 CFLAGS := -Wall -Wextra -Werror -c
-CC = gcc
+CC = cc
 
 all: $(NAME)
 

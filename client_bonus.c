@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eamrati <eamrati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:31:04 by eamrati           #+#    #+#             */
-/*   Updated: 2023/10/28 18:55:07 by eamrati          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:00:06 by eamrati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 #include <stdio.h>
 #include <unistd.h>
+
+void recv(int signal)
+{
+	if (signal == SIGUSR1)
+		ft_printf("Signal received!");
+	exit(0);
+}
 
 void	send(int pid, char *buffer)
 {	
@@ -21,7 +28,7 @@ void	send(int pid, char *buffer)
 	char	c;
 
 	a = 0;
-	while (buffer && buffer[a])
+	while (buffer)
 	{
 		c = buffer[a];
 		inner = 0;
@@ -35,6 +42,9 @@ void	send(int pid, char *buffer)
 			c >>= 1;
 			inner++;
 		}
+		if (buffer[a] == 0)
+			while (1)
+				pause();
 		a++;
 	}
 }
@@ -62,8 +72,12 @@ static t_bool	isnumber(char *arg1)
 
 int	main(int argc, char *argv[])
 {
+	struct sigaction	info;
+	
+	info.__sigaction_u.__sa_handler = recv;
+	sigaction(SIGUSR1, &info, NULL);
 	if (argc != 3)
-	{
+	{		
 		ft_printf("You need to enter 2 arguments only\n");
 		return (1);
 	}
