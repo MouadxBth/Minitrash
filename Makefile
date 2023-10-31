@@ -1,7 +1,7 @@
 NAMEC := client
 NAMES := server
-BNAMEC := client
-BNAMES := server
+BNAMEC := client_bonus
+BNAMES := server_bonus
 LIB := minitalk.h
 CFILESC := ft_atoi.c client.c ft_memset.c
 CFILESS :=  ft_atoi.c server.c ft_memset.c

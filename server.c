@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eamrati <eamrati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:31:47 by eamrati           #+#    #+#             */
-/*   Updated: 2023/05/30 17:16:12 by eamrati          ###   ########.fr       */
+/*   Updated: 2023/10/31 22:01:46 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(void)
 	struct sigaction	info;
 
 	ft_memset(&info, 0, sizeof(struct sigaction));
-	info.__sigaction_u.__sa_sigaction = handler;
+	info.sa_sigaction = handler;
 	info.sa_flags = SA_SIGINFO;
 	ft_printf("PID: %d\n", getpid());
 	sigaction(SIGUSR1, &info, NULL);
